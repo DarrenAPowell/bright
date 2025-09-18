@@ -1,15 +1,15 @@
-Clone Repo
+## Clone Repo
 
 git clone <your-repo-url>
 cd <your-project-folder>
 
-install dependancies
+## Install dependancies
 npm install
 
-start the dev server
+## Start the dev server
 npm run dev
 
-Run tests
+## Run Tests
 
 npm test
 
