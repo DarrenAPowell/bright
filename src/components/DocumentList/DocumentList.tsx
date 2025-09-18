@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FileDisplay from "../FileDisplay/FileDisplay";
+import "./styles.css";
 
 type FileItem = {
   type: string;
@@ -13,42 +14,61 @@ interface Props {
 }
 
 const DocumentList: React.FC<Props> = ({ items }) => {
-
   const [query, setQuery] = useState("");
-  const filteredItems = items.filter(item =>
+  const [sortBy, setSortBy] = useState<"name" | "date">("name");
+
+  const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
 
+  const sortedItems = [...filteredItems].sort((a, b) => {
+    if (sortBy === "name") {
+      return a.name.localeCompare(b.name);
+    } else if (sortBy === "date") {
+      const dateA = a.added ? new Date(a.added).getTime() : 0;
+      const dateB = b.added ? new Date(b.added).getTime() : 0;
+      return dateB - dateA;
+    }
+    return 0;
+  });
+
   return (
-    <div className="max-w-4xl mx-auto bg-white shadow rounded">
-    {/* Search input */}
-    <div className="p-2 border-b">
-      <input
-        type="text"
-        value={query}
-        onChange={e => setQuery(e.target.value)}
-        placeholder="Search by name..."
-        className="w-full p-2 border rounded"
-      />
+    <div className="document-list">
+      {/* Search & Sort */}
+      <div className="document-list-controls">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search by name..."
+        />
+
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as "name" | "date")}
+        >
+          <option value="name">Sort by Name</option>
+          <option value="date">Sort by Date</option>
+        </select>
+      </div>
+
+      {/* Header */}
+      <div className="document-list-header">
+        <div>File type</div>
+        <div>Name</div>
+        <div>Date added</div>
+      </div>
+
+      {/* File rows */}
+      {sortedItems.map((item, idx) => (
+        <FileDisplay key={idx} item={item} />
+      ))}
+
+      {/* No results message */}
+      {sortedItems.length === 0 && (
+        <div className="document-list-empty">No files found.</div>
+      )}
     </div>
-
-    {/* Header */}
-    <div className="grid grid-cols-3 gap-4 p-2 font-bold border-b bg-gray-100">
-      <div>File type</div>
-      <div>Name</div>
-      <div>Date added</div>
-    </div>
-
-    {/* File rows */}
-    {filteredItems.map((item, idx) => (
-      <FileDisplay key={idx} item={item} />
-    ))}
-
-    {/* Optional: show message if no results */}
-    {filteredItems.length === 0 && (
-      <div className="p-4 text-center text-gray-500">No files found.</div>
-    )}
-  </div>
   );
 };
 
