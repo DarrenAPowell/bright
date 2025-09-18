@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FileDisplay from "../FileDisplay/FileDisplay";
-import "./styles.css";
+import "./DocumentListStyles.css";
 
 type FileItem = {
   type: string;

@@ -6,8 +6,8 @@ import './App.css'
 
 function App() {
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Document Viewer</h1>
+    <div className="document-viewer">
+      <h1 className="main-headline">Document Viewer</h1>
       <DocumentList items={mockData} />
     </div>
   );
