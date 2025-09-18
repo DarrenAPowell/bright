@@ -54,9 +54,10 @@ const DocumentList: React.FC<Props> = ({ items }) => {
 
       {/* Header */}
       <div className="document-list-header">
-        <div>File type</div>
-        <div>Name</div>
+      <div>Name</div>
         <div>Date added</div>
+        <div>File type</div>
+        
       </div>
 
       {/* File rows */}

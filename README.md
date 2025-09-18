@@ -1,69 +1,25 @@
-# React + TypeScript + Vite
+Clone Repo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+git clone <your-repo-url>
+cd <your-project-folder>
 
-Currently, two official plugins are available:
+install dependancies
+npm install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+start the dev server
+npm run dev
 
-## Expanding the ESLint configuration
+Run tests
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+npm test
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Improvements
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Implement dynamic data fetching with useEffect instead of relying on mock data.
+- Follow TDD (RED → GREEN → REFACTOR) more rigorously; most tests were smoke tests, but refactoring and tighter tests could have been done before building.
+- Extract date parsing and formatting into a reusable utility function (e.g., formatDate or parseDate) instead of using `new Date()` directly in the component.
+- depending on scope, if this was a large list of documents, I would consider a pagination after a set amount of documents loaded to improve performance and reduce initial render time
+- I would have further expanded the sorting, so that you can sort by name ascending and descending as well as date ascending and descending
+- I tried to get a local set up of tailwind, but my machine just did not want to play along. But I would of used tailwind for styling.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```

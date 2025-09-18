@@ -21,10 +21,10 @@ const FileDisplay: React.FC<Props> = ({ item }) => {
         <div className="file-icon">
           {hasFiles && <span className={`chevron ${isOpen ? "open" : ""}`}>▶</span>}
         </div>
-
-        <div className="file-type">{item.type}</div>
         <div className="file-name">{item.name}</div>
         <div className="file-added">{item.added || ""}</div>
+        <div className="file-type">{item.type}</div>
+        
       </div>
 
       
