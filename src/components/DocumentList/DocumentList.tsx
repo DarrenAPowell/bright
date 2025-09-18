@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FileDisplay from "../FileDisplay/FileDisplay";
 import "./DocumentListStyles.css";
 
-type FileItem = {
+export type FileItem = {
   type: string;
   name: string;
   added?: string;

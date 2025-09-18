@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import DocumentList from "./components/DocumentList/DocumentList";
 import mockData from "./data/mockData";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import type { FileItem } from "./DocumentList";
 import "./FileDisplayStyles.css";
+import type { FileItem } from "../DocumentList/DocumentList";
 
 interface Props {
   item: FileItem;
@@ -30,9 +30,9 @@ const FileDisplay: React.FC<Props> = ({ item }) => {
       
       {hasFiles && isOpen && (
         <div className="file-children">
-          {item.files!.map((child, idx) => (
-            <FileDisplay key={idx} item={child} />
-          ))}
+         {item.files?.map((child: FileItem, idx: number) => (
+           <FileDisplay key={idx} item={child} />
+         ))}
         </div>
       )}
     </>
