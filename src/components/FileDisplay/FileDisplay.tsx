@@ -1,33 +1,41 @@
-import * as React from "react";
-
-
-type FileItem = {
-  type: string;
-  name: string;
-  added?: string;
-  files?: FileItem[];
-};
+import React, { useState } from "react";
+import type { FileItem } from "./DocumentList";
+import "./FileDisplay.css";
 
 interface Props {
   item: FileItem;
 }
 
 const FileDisplay: React.FC<Props> = ({ item }) => {
-  const isFolder = item.type === "folder";
+  const [isOpen, setIsOpen] = useState(false);
+
+  const hasFiles = item.files && item.files.length > 0;
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-2 border-b hover:bg-gray-50">
-      {/* File type */}
-      <div>{isFolder ? "📁" : "📄"} {item.type}</div>
+    <>
+      <div
+        className={`file-row ${hasFiles ? "clickable" : ""}`}
+        onClick={() => hasFiles && setIsOpen(!isOpen)}
+      >
+        
+        <div className="file-icon">
+          {hasFiles && <span className={`chevron ${isOpen ? "open" : ""}`}>▶</span>}
+        </div>
 
-      {/* Name */}
-      <div className="font-medium">{item.name}</div>
-
-      {/* Date added or file count */}
-      <div className="text-gray-500">
-        {isFolder && item.files ? `(${item.files.length} file${item.files.length > 1 ? "s" : ""})` : item.added}
+        <div className="file-type">{item.type}</div>
+        <div className="file-name">{item.name}</div>
+        <div className="file-added">{item.added || ""}</div>
       </div>
-    </div>
+
+      
+      {hasFiles && isOpen && (
+        <div className="file-children">
+          {item.files!.map((child, idx) => (
+            <FileDisplay key={idx} item={child} />
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

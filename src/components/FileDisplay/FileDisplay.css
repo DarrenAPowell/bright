@@ -1,0 +1,27 @@
+.file-row {
+  display: grid;
+  grid-template-columns: 1rem 1fr 2fr 1fr; 
+  padding: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: transparent;
+}
+
+.file-row.clickable {
+  cursor: pointer;
+  background: #f9fafb;
+}
+
+.file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chevron {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.chevron.open {
+  transform: rotate(90deg);
+}
